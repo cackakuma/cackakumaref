@@ -1,4 +1,3 @@
-import Contribution from "./Contriibution";
 
 const Program = ({
   leadImage, 
@@ -231,9 +230,6 @@ const Program = ({
             </div>
           </div>
         )}
-
-        {/* Contribution Component */}
-        <Contribution programColor={programColor} />
       </div>
     </main>
   );
