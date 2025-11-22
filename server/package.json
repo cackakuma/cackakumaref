@@ -5,8 +5,8 @@
   "main": "server.js",
 
   "scripts": {
-    "start": "node server.js",         // Used by Render
-    "dev": "nodemon server.js"         // Used locally
+    "start": "node server.js",       
+    "dev": "nodemon server.js"         
   },
 
   "keywords": [],
