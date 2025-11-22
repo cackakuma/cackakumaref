@@ -6,7 +6,7 @@ const path = require('path');
 const { exec } = require('child_process');
 
 const uploadDir = path.join(__dirname, '../uploads');
-const gitClientImageDir = path.join(__dirname, '../client/images');
+const gitClientImageDir = path.join(__dirname, '../../client/public/images');
 
 // Function to copy images and push to GitHub
 async function pushUploadedImagesToGitHub() {
@@ -58,3 +58,4 @@ router.post('/upload-images', upload.uploadMultiple, async (req, res) => {
 });
 
 module.exports = router;
+
