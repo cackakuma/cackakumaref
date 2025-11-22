@@ -1,57 +1,60 @@
-const multer = require('multer');
+const express = require('express');
+const router = express.Router();
+const upload = require('./path/to/your/multerConfig'); // Adjust to your Multer config path
+const fsExtra = require('fs-extra');
 const path = require('path');
-const fs = require('fs');
+const { exec } = require('child_process');
 
-// Create uploads directory if it doesn't exist
 const uploadDir = path.join(__dirname, '../uploads');
-if (!fs.existsSync(uploadDir)) {
-  fs.mkdirSync(uploadDir, { recursive: true });
+const gitClientImageDir = path.join(__dirname, '../client/images');
+
+// Function to copy images and push to GitHub
+async function pushUploadedImagesToGitHub() {
+  try {
+    // Copy uploaded files to client images folder tracked by Git
+    await fsExtra.copy(uploadDir, gitClientImageDir, { overwrite: false });
+
+    // Check for changes before committing
+    exec(`git diff --quiet`, (diffErr) => {
+      if (diffErr) {
+        exec(`git add ${gitClientImageDir}`, (addErr) => {
+          if (addErr) throw addErr;
+
+          exec(`git commit -m "Add uploaded images"`, (commitErr) => {
+            // Handle case with no changes to commit
+            if (commitErr && commitErr.message.includes('nothing to commit')) {
+              console.log('No new images to commit');
+              return;
+            } else if (commitErr) throw commitErr;
+
+            exec(`git push origin main`, (pushErr) => {
+              if (pushErr) throw pushErr;
+              console.log('Images pushed to GitHub successfully');
+            });
+          });
+        });
+      } else {
+        console.log('No changes detected, skipping commit.');
+      }
+    });
+  } catch (error) {
+    console.error('GitHub push automation error:', error);
+  }
 }
 
-// Configure multer storage
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, uploadDir);
-  },
-  filename: (req, file, cb) => {
-    // Generate unique filename with timestamp
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-    cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname));
+// Route for uploading multiple images using your Multer config
+router.post('/upload-images', upload.uploadMultiple, async (req, res) => {
+  try {
+    // Multer has saved files locally at this point
+
+    // Automate pushing files to GitHub repo
+    await pushUploadedImagesToGitHub();
+
+    res.status(200).json({ message: 'Images uploaded and pushed to GitHub.' });
+  } catch (error) {
+    console.error('Error during upload or GitHub push:', error);
+    res.status(500).json({ error: 'Upload or GitHub push failed' });
   }
 });
 
-// File filter to accept only images
-const fileFilter = (req, file, cb) => {
-  const allowedTypes = /jpeg|jpg|png|gif|webp/;
-  const extname = allowedTypes.test(path.extname(file.originalname).toLowerCase());
-  const mimetype = allowedTypes.test(file.mimetype);
-
-  if (mimetype && extname) {
-    return cb(null, true);
-  } else {
-    cb(new Error('Only image files are allowed!'));
-  }
-};
-
-// Configure multer
-const upload = multer({
-  storage: storage,
-  limits: {
-    fileSize: 5 * 1024 * 1024, // 5MB limit
-  },
-  fileFilter: fileFilter
-});
-
-// Export different upload configurations
-module.exports = {
-  // For multiple images upload (up to 10 images)
-  uploadMultiple: upload.array('pics', 10),
-
-  uploadLogo: upload.array('logo', 1),
-
-  // For mixed uploads (single image + multiple images)
-  uploadMixed: upload.fields([
-    { name: 'image', maxCount: 1 },
-    { name: 'pics', maxCount: 10 }
-  ])
-};
+module.exports = router;
