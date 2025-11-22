@@ -1,0 +1,2 @@
+/images/displayerpic.png
+/images/trial no bg.png
