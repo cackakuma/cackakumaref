@@ -5,7 +5,7 @@ import Programs from "./programs";
 import Posts from "./posts";
 import NoPage from "./noPage";
 import Partner from "./Partners";
-import AdminLayout from "./AdminLayout";
+import AdminLayout from "./adminLayout";
 
 const navLinks = [
   { path: "/admin/cac", label: "Dashboard", end: true },
