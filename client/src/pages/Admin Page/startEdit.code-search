@@ -1,0 +1,58 @@
+# Query: startEdit
+# ContextLines: 1
+
+12 results - 6 files
+
+client\src\pages\Admin Page\cac.jsx:
+  127    // Start editing form with selected organisation data
+  128:   const startEdit = (org) => {
+  129      setOrgName(org.orgName || "");
+
+  331                      <button
+  332:                       onClick={() => startEdit(org)}
+  333                        className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-all duration-300 flex items-center space-x-1"
+
+client\src\pages\Admin Page\members.jsx:
+  126    // Start editing form with selected memberanisation data
+  127:   const startEdit = (member) => {
+  128      setfullName(member.fullName || "");
+
+  337                      <button
+  338:                       onClick={() => startEdit(member)}
+  339                        className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-all duration-300 flex items-center space-x-1"
+
+client\src\pages\Admin Page\Partners.jsx:
+  122    // Start editing form with selected Partner data
+  123:   const startEdit = (partner) => {
+  124      setpartnerName(partner.partnerName || "");
+
+  312                      <button
+  313:                       onClick={() => startEdit(partner)}
+  314                        className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-all duration-300 flex items-center space-x-1"
+
+client\src\pages\Admin Page\posts.jsx:
+  178    // Start editing form with selected post data
+  179:   const startEditPost = (post) => {
+  180      try {
+
+  426                      <button
+  427:                       onClick={() => startEditPost(post)}
+  428                        className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-all duration-300 flex items-center space-x-1"
+
+client\src\pages\Admin Page\programs.jsx:
+  133    // Start editing form with selected Programanisation data
+  134:   const startEdit = (program) => {
+  135      setTitle(program.title || "");
+
+  347                      <button
+  348:                       onClick={() => startEdit(program)}
+  349                        className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-all duration-300 flex items-center space-x-1"
+
+client\src\pages\Prompt\newPost.jsx:
+  131    // Start editing
+  132:   const startEdit = (post) => {
+  133      try {
+
+  350                        <button
+  351:                         onClick={() => startEdit(post)}
+  352                          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition disabled:opacity-50"
