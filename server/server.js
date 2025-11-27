@@ -7,8 +7,6 @@ const routes = require('./Routes/Routes');
 const app = express();
 
 connectDB();
-const cors = require("cors");
-
 app.use(cors({
   origin: "*", 
   methods: "GET,POST,PUT,DELETE",
