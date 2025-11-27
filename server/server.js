@@ -7,7 +7,13 @@ const routes = require('./Routes/Routes');
 const app = express();
 
 connectDB();
-app.use(cors());
+const cors = require("cors");
+
+app.use(cors({
+  origin: "*", 
+  methods: "GET,POST,PUT,DELETE",
+  credentials: true
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
