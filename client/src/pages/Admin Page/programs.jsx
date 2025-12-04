@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import {
   addProgram,
@@ -177,17 +178,19 @@ const Programs = () => {
       {/* GLOBAL LOADING */}
       {loading && <LoadingScreen />}
 
+      {/* Header */}
       <div className="bg-white rounded-2xl shadow-lg overflow-hidden mb-8">
-        <div className="bg-gradient-to-r from-green-600 to-green-700 px-8 py-6">
+        <div className="bg-gradient-to-r from-blue-600 to-blue-700 px-8 py-6">
           <h1 className="text-white text-3xl font-bold text-center">
             Program Management
           </h1>
-          <p className="text-green-100 text-center mt-2">
+          <p className="text-blue-100 text-center mt-2">
             Manage Programs and related information
           </p>
         </div>
       </div>
 
+      {/* Buttons */}
       <div className="flex justify-center gap-4 mb-8">
         <button
           onClick={() =>
@@ -200,8 +203,8 @@ const Programs = () => {
           }
           className={`px-8 py-3 font-semibold rounded-xl shadow-lg flex items-center space-x-2 ${
             view === "form"
-              ? "bg-green-600 text-white transform scale-105"
-              : "bg-white text-green-600 border-2 border-green-600 hover:bg-green-50"
+              ? "bg-blue-600 text-white transform scale-105"
+              : "bg-white text-blue-600 border-2 border-blue-600 hover:bg-blue-50"
           }`}
         >
           <span>{editingId ? "Edit Program" : "Add Program"}</span>
@@ -211,8 +214,8 @@ const Programs = () => {
           onClick={() => setView("list")}
           className={`px-8 py-3 font-semibold rounded-xl shadow-lg flex items-center space-x-2 ${
             view === "list"
-              ? "bg-green-600 text-white transform scale-105"
-              : "bg-white text-green-600 border-2 border-green-600 hover:bg-green-50"
+              ? "bg-blue-600 text-white transform scale-105"
+              : "bg-white text-blue-600 border-2 border-blue-600 hover:bg-blue-50"
           }`}
         >
           <span>View Programs</span>
@@ -264,7 +267,7 @@ const Programs = () => {
               <div key={label} className="flex flex-col">
                 <label className="mb-2 font-semibold text-gray-700">{label}</label>
                 <textarea
-                  className="border border-gray-300 rounded-lg p-3 bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500"
+                  className="border border-gray-300 rounded-lg p-3 bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                   rows={3}
                   value={value}
                   onChange={onChange}
@@ -277,7 +280,7 @@ const Programs = () => {
             <div>
               <label className="block mb-2 font-semibold text-gray-700">Integrity Items</label>
               <div className="flex gap-2 mb-2">
-                <button type="button" onClick={addIntegrity} className="px-3 py-1 bg-green-600 text-white rounded-lg">+</button>
+                <button type="button" onClick={addIntegrity} className="px-3 py-1 bg-blue-600 text-white rounded-lg">+</button>
                 <button type="button" onClick={removeIntegrity} className="px-3 py-1 bg-gray-600 text-white rounded-lg">-</button>
               </div>
               {integrity.length === 0 && <p className="text-gray-500">No integrity items</p>}
@@ -315,7 +318,7 @@ const Programs = () => {
 
             {/* Buttons */}
             <div className="flex gap-4">
-              <button type="submit" className="flex-grow bg-green-700 text-white py-3 rounded-xl">{editingId ? "Update Program" : "Add Program"}</button>
+              <button type="submit" className="flex-grow bg-blue-700 text-white py-3 rounded-xl">{editingId ? "Update Program" : "Add Program"}</button>
               {editingId && <button type="button" onClick={cancelEdit} className="bg-gray-300 text-gray-800 py-3 px-6 rounded-xl">Cancel</button>}
             </div>
           </form>
@@ -340,7 +343,7 @@ const Programs = () => {
                     <div className="flex justify-between">
                       <h2 className="text-xl font-bold">{prog.programName}</h2>
                       <div className="flex gap-2">
-                        <button onClick={() => startEdit(prog)} className="bg-green-600 text-white px-3 py-2 rounded-lg">Edit</button>
+                        <button onClick={() => startEdit(prog)} className="bg-blue-600 text-white px-3 py-2 rounded-lg">Edit</button>
                         <button onClick={() => handleDelete(prog._id)} className="bg-red-600 text-white px-3 py-2 rounded-lg">Delete</button>
                       </div>
                     </div>
