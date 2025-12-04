@@ -1,7 +1,7 @@
 const LoadingScreen = () => {
   return (
-    <div className="fixed top-20 inset-0 bg-white bg-opacity-40 flex items-center justify-center z-[9999]">
-      <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-600"></div>
+    <div className="absolute inset-0 bg-white bg-opacity-70 flex items-center justify-center rounded-2xl z-50">
+      <div className="animate-spin rounded-full h-14 w-14 border-t-4 border-b-4 border-blue-600"></div>
     </div>
   );
 };
