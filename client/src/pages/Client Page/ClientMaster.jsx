@@ -4,7 +4,6 @@ import AboutUs from "./AboutUs";
 import Programs from "./ProgramsClient";
 import Home from "./Home";
 import TheBoard from "./TheBoard";
-import DonateButton from "./Buttons/donateButton";
 import Layout from "./Layout";
 
 const ClientMaster = () => {
@@ -18,11 +17,6 @@ const ClientMaster = () => {
           <Route path="about" element={<AboutUs />} />
         </Route>
       </Routes>
-      
-       <DonateButton 
-          style="bg-blue-700 p-2 text-white font-bold fixed bottom-3 right-0 pr-3 rounded-tl-lg rounded-bl-lg shadow-2xl shadow-black" 
-          data="donate"
-        />
       <Footer />
     </div>
   );
