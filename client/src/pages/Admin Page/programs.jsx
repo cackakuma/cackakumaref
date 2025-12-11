@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import {getPrograms, addProgram, updateProgram, deleteProgram} from "../services/AdminApi";
+import LoadingScreen from "../../components/loadingScreen";
 
 const Programs = () => {
   // Form and data states
@@ -95,12 +96,13 @@ const handleFileChange = (index, event) => {
       !description.trim() ||
       !faci_name.trim() ||
       !faci_phone.trim() ||
-      !faci_email.trim() || !cohort_duration.trim() || !no_of_cohorts.trim() || !volume.trim()
+      !faci_email.trim() || !cohort_duration.trim() || !no_of_cohorts.trim()
     ) {
       alert("Please fill all the blanks");
       return;
     }
 
+    setLoading(true);
     const formData = new FormData();
     formData.append("title", title.trim());
     formData.append("description", description.trim());
@@ -126,7 +128,6 @@ const handleFileChange = (index, event) => {
       formData.append('communityImpact', JSON.stringify([]));
     }
 
-    setLoading(true);
     try {
       if (editingId) {
         // Update existing Program
@@ -146,6 +147,8 @@ const handleFileChange = (index, event) => {
     } catch (err) {
       alert("Failed to save Program data. Please try again.");
       console.error(err);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -155,7 +158,8 @@ const handleFileChange = (index, event) => {
       'Are you sure you want to delete the details of the Program?'
     );
     if (!confirmDelete) return;
-    
+
+    setLoading(true);
     try {
       await deleteProgram(id);
       setPrograms((prev) => prev.filter((program) => program._id !== id));
@@ -163,6 +167,8 @@ const handleFileChange = (index, event) => {
     } catch (err) {
       alert("Failed to delete Program. Please try again.");
       console.error(err);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -244,6 +250,8 @@ const handleFileChange = (index, event) => {
 
   return (
     <div className="max-w-7xl mx-auto px-6 py-10">
+      {loading && <LoadingScreen />}
+
       <div className="bg-white rounded-2xl shadow-lg overflow-hidden mb-8">
         <div className="bg-gradient-to-r from-blue-600 to-blue-900 px-8 py-6">
           <h1 className="text-white text-3xl font-bold text-center">

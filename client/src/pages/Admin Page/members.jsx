@@ -134,8 +134,9 @@ const Members = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-6 py-10 relative">
+    <div className="max-w-7xl mx-auto px-6 py-10">
       {loading && <LoadingScreen />}
+
       {/* Header */}
       <div className="bg-white rounded-2xl shadow-lg overflow-hidden mb-8">
         <div className="bg-gradient-to-r from-blue-600 to-blue-700 px-8 py-6">

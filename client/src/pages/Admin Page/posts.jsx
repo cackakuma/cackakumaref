@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import {getPosts, addPost, updatePost, deletePost, getFeedbacks, addFeedback, updateFeedback, deleteFeedback, getTestimonies, addTestimony, updateTestimony, deleteTestimony, getPrograms} from "../services/AdminApi";
-
+import LoadingScreen from "../../components/loadingScreen";
+import LoadingSpinner from "../../components/LoadingSpinner";
 
 const Posts = () => {
   // Form and data states
@@ -400,6 +401,8 @@ const handleFeedbackSubmit = (e) => {
 
   return (
     <div className="max-w-7xl mx-auto px-6 py-10">
+      {loading && <LoadingScreen />}
+
       {/* Header */}
       <div className="bg-white rounded-2xl shadow-lg overflow-hidden mb-8">
         <div className="bg-gradient-to-r from-blue-600 to-blue-700 px-8 py-6">
